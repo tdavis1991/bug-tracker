@@ -29,8 +29,6 @@ export const POST = async (req) => {
         // Assuming attachment is an object with filename, mimeType, and path properties
         newIssue.attachments.push({
           filename: attachment.filename,
-          mimeType: attachment.mimeType,
-          path: attachment.path,
           uploadedBy: existingUser._id // Assuming the user who uploaded the attachment is logged in
         });
       });

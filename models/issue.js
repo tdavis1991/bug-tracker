@@ -61,12 +61,6 @@ const issueSchema = new mongoose.Schema({
       filename: {
         type: String,
       },
-      mimeType: {
-        type: String,
-      },
-      path: {
-        type: String,
-      },
       uploadedBy: {
         type: mongoose.Schema.Types.ObjectId,
         ref: 'User', // Reference to the User model
