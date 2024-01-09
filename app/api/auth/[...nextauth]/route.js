@@ -9,7 +9,7 @@ const handler = NextAuth({
   providers: [
     GoogleProvider({
       clientId: process.env.GOOGLE_ID,
-      clientSecret: process.env.GOOGLR_SECRET
+      clientSecret: process.env.GOOGLE_SECRET
     }),
     GitHubProvider({
       clientId: process.env.GITHUB_ID,
@@ -31,13 +31,20 @@ const handler = NextAuth({
         const userExist = await User.findOne({ email: profile.email });
 
         if(!userExist) {
-          await User.create({
-            
+          const newUser = await User.create({
+            fullname: profile.name,
+            email: profile.email,
+            avatar: profile.picture,
           })
+          return newUser
         }
+
+        return new Response(JSON.stringify(userExist), { status: 201, message: 'User created sucessfully' })
       } catch (error) {
-        
+        throw new Error('Failed to create user: ' + error.message);
       }
     }
   }
 })
+
+export { handler as GET, handler as POST };

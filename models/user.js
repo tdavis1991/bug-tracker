@@ -1,10 +1,9 @@
 import mongoose, { Schema, model, models } from 'mongoose';
 
 const UserSchema = new Schema({
-  username: {
+  fullName: {
     type: String,
-    required: true,
-    unique: true
+    required: true
   },
   email: {
     type: String,
@@ -15,11 +14,8 @@ const UserSchema = new Schema({
     type: String,
     required: true
   },
-  fullName: {
-    type: String,
-    required: true
-  },
   role: {
+    type: String,
     enum: ['admin', 'developer', 'tester', 'user'],
     default: 'user',
   },
@@ -28,6 +24,6 @@ const UserSchema = new Schema({
   }
 });
 
-const User = models.User || model('User', userSchema);
+const User = models.User || model('User', UserSchema);
 
 export default User;
